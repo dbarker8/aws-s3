@@ -855,7 +855,7 @@ var S3Client = function () {
                             throwError(config, file);
 
                             fd = new FormData();
-                            key = "" + (config.dirName ? config.dirName + "/" : "") + file.name;
+                            key = "" + (config.dirName ? config.dirName + "/" : "") + (config.fileName ? config.fileName : file.name);
                             url = "https://" + config.bucketName + ".s3.amazonaws.com/";
 
                             fd.append("key", key);
@@ -894,8 +894,8 @@ var S3Client = function () {
                         case 22:
                             return _context.abrupt("return", Promise.resolve({
                                 bucket: config.bucketName,
-                                key: "" + (config.dirName ? config.dirName + "/" : "") + file.name,
-                                location: "" + url + (config.dirName ? config.dirName + "/" : "") + file.name,
+                                key: "" + (config.dirName ? config.dirName + "/" : "") + (config.fileName ? config.fileName : file.name),
+                                location: "" + url + (config.dirName ? config.dirName + "/" : "") + (config.fileName ? config.fileName : file.name),
                                 result: data
                             }));
 
