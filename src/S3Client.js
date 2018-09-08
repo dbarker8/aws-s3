@@ -11,7 +11,7 @@ class S3Client {
         throwError(config, file);
 
         const fd = new FormData();
-        const key = `${config.dirName ? config.dirName + "/" : ""}${file.name}`;
+        const key = `${config.dirName ? config.dirName + "/" : ""}${config.fileName ? config.fileName : file.name }`;
         const url = `https://${config.bucketName}.s3.amazonaws.com/`;
         fd.append("key", key);
         fd.append("acl", "public-read");
@@ -44,9 +44,9 @@ class S3Client {
         if (!data.ok) return Promise.reject(data);
         return Promise.resolve({
             bucket: config.bucketName,
-            key: `${config.dirName ? config.dirName + "/" : ""}${file.name}`,
+            key: `${config.dirName ? config.dirName + "/" : ""}${config.fileName ? config.fileName : file.name}`,
             location: `${url}${config.dirName ? config.dirName + "/" : ""}${
-                file.name
+                config.fileName ? config.fileName : file.name
                 }`,
             result: data
         });
